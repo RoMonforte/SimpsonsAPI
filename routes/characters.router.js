@@ -1,34 +1,42 @@
 const express = require('express');
 
+const CharactersService = require('../services/characters.service')
+
 const router = express.Router();
+const service = new CharactersService();
 
-router.get('/', (req,res) => {
-  res.json([{
-    name: 'Homer',
-    age: '50'
-  },
-  {
-    name: 'Marge',
-    age: '51'
-  }
-]);
+router.get('/', async (req,res) => {
+  const characters = await service.find();
+  res.json(characters);
 });
 
-router.get('/:id', (req,res) => {
+router.get('/:id', async (req,res) => {
   const {id} = req.params;
-  res.json({
-    id,
-    name: 'Homer',
-    age: '50'
-  });
+  const character = await service.findOne(id);
+  res.json(character);
 });
 
-router.post('/',(req,res) => {
+router.post('/', async (req,res) => {
   const body = req.body;
-  res.json({
-    message: 'created',
-    data: body
-  })
-})
+  const newCharacter = await service.create(body);
+  res.status(201).json(newCharacter);
+});
+
+router.patch('/:id', async (req,res) => {
+  try{
+  const {id} = req.params;
+  const body = req.body;
+  const character = await service.update(id,body);
+  res.json(character);
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+});
+
+router.delete('/:id', async (req,res) => {
+  const {id} = req.params;
+  const rta = await service.delete(id);
+  res.json(rta);
+});
 
 module.exports = router;
