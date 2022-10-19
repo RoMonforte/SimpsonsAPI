@@ -1,5 +1,5 @@
 const boom = require('@hapi/boom');
-const sequelize = require('../libs/sequelize');
+const { models } = require('../libs/sequelize');
 
 class CharactersService {
 
@@ -19,9 +19,8 @@ class CharactersService {
 
 
   async find() {
-    const query = 'SELECT * FROM tasks';
-    const [data] = await sequelize.query(query);
-    return data;
+    const rta = await models.Character.findAll();
+    return rta;
 
   }
 
