@@ -1,6 +1,8 @@
 const express = require('express');
 
-const CharactersService = require('../services/characters.service')
+const CharactersService = require('../services/characters.service');
+const validatorHandler = require('../middlewares/validator.handler');
+const {createCharacterSchema, updateCharacterSchema, getCharacterSchema} = require('../schemas/character.schema')
 
 const router = express.Router();
 const service = new CharactersService();
@@ -10,26 +12,37 @@ router.get('/', async (req,res) => {
   res.json(characters);
 });
 
-router.get('/:id', async (req,res) => {
+router.get('/:id',
+validatorHandler(getCharacterSchema, 'params'),
+async (req,res, next) => {
+  try{
   const {id} = req.params;
   const character = await service.findOne(id);
   res.json(character);
+  } catch (err){
+    next(err);
+  }
 });
 
-router.post('/', async (req,res) => {
+router.post('/',
+validatorHandler(createCharacterSchema, 'body'),
+  async (req,res) => {
   const body = req.body;
   const newCharacter = await service.create(body);
   res.status(201).json(newCharacter);
 });
 
-router.patch('/:id', async (req,res) => {
+router.patch('/:id',
+validatorHandler(getCharacterSchema, 'params'),
+validatorHandler(updateCharacterSchema, 'body'),
+async (req,res, next) => {
   try{
   const {id} = req.params;
   const body = req.body;
   const character = await service.update(id,body);
   res.json(character);
-  } catch (error) {
-    res.status(404).json({message: error.message});
+  } catch (err) {
+    next(err);
   }
 });
 

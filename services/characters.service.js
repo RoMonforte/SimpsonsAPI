@@ -1,7 +1,10 @@
+const boom = require('@hapi/boom');
+const sequelize = require('../libs/sequelize');
+
 class CharactersService {
 
   constructor(){
-    this.characters = [{id: "1", name: 'Homer', age: 45},{id: "2",name: 'Marge', age: 44}];
+        this.characters = [{id: "1", name: 'Homer', age: 45, isBlock: true},{id: "2",name: 'Marge', age: 44, isBlock: false}];
   }
 
 
@@ -13,16 +16,32 @@ class CharactersService {
     this.characters.push(newCharacter);
     return newCharacter;
   }
+
+
   async find() {
-    return this.characters;
+    const query = 'SELECT * FROM tasks';
+    const [data] = await sequelize.query(query);
+    return data;
+
   }
+
+
   async findOne(id) {
-    return this.characters.find(item => item.id === id);
+    const character = this.characters.find(item => item.id === id);
+    if(!character) {
+      throw boom.notFound('Character not found!');
+    }
+    if(character.isBlock) {
+      throw boom.conflict('Character is blocked!');
+    }
+    return character;
   }
+
+
   async update(id, changes) {
     const index = this.characters.findIndex(item => item.id === id);
     if(index === -1) {
-      throw new Error('Product not found!');
+      throw boom.notFound('Character not found!');
     }
     const character = this.characters[index]
     this.characters[index] = {...character, ...changes};
@@ -31,7 +50,7 @@ class CharactersService {
   async delete(id){
     const index = this.characters.findIndex(item => item.id === id);
     if(index === -1) {
-      throw new Error('Character not found!');
+      throw boom.notFound('Character not found!');
     }
     this.characters.splice(index, 1);
     return { id };
