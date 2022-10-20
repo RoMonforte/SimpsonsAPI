@@ -9,11 +9,7 @@ class CharactersService {
 
 
   async create(data) {
-    const newCharacter = {
-      id: "10" ,
-      ...data
-    }
-    this.characters.push(newCharacter);
+    const newCharacter = await models.Character.create(data)
     return newCharacter;
   }
 
@@ -26,33 +22,25 @@ class CharactersService {
 
 
   async findOne(id) {
-    const character = this.characters.find(item => item.id === id);
+    const character = await models.Character.findByPk(id);
     if(!character) {
-      throw boom.notFound('Character not found!');
-    }
-    if(character.isBlock) {
-      throw boom.conflict('Character is blocked!');
+      throw boom.notFound('Character not found!')
     }
     return character;
   }
 
 
   async update(id, changes) {
-    const index = this.characters.findIndex(item => item.id === id);
-    if(index === -1) {
-      throw boom.notFound('Character not found!');
-    }
-    const character = this.characters[index]
-    this.characters[index] = {...character, ...changes};
-    return this.characters[index];
+    const character = await this.findOne(id);
+    const rta = await character.update(changes);
+    return rta;
   }
+
+
   async delete(id){
-    const index = this.characters.findIndex(item => item.id === id);
-    if(index === -1) {
-      throw boom.notFound('Character not found!');
-    }
-    this.characters.splice(index, 1);
-    return { id };
+    const character = await this.findOne(id);
+    await character.destroy();
+    return {id};
   }
 }
 

@@ -45,7 +45,7 @@ const CharacterSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    default: Sequelize.NOW
+    defaultValue: Sequelize.NOW
   }
 }
 
