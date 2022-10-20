@@ -46,10 +46,16 @@ async (req,res, next) => {
   }
 });
 
-router.delete('/:id', async (req,res) => {
-  const {id} = req.params;
-  const rta = await service.delete(id);
-  res.json(rta);
+router.delete('/:id',
+validatorHandler(getCharacterSchema, 'params'),
+async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await service.delete(id);
+    res.status(201).json({id});
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

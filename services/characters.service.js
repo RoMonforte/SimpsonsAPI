@@ -3,9 +3,7 @@ const { models } = require('../libs/sequelize');
 
 class CharactersService {
 
-  constructor(){
-        this.characters = [{id: "1", name: 'Homer', age: 45, isBlock: true},{id: "2",name: 'Marge', age: 44, isBlock: false}];
-  }
+  constructor(){}
 
 
   async create(data) {
@@ -40,7 +38,7 @@ class CharactersService {
   async delete(id){
     const character = await this.findOne(id);
     await character.destroy();
-    return {id};
+    return { id };
   }
 }
 
