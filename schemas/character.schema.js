@@ -6,9 +6,9 @@ const status = Joi.string().min(3).max(15);
 const occupation = Joi.string().min(3).max(15);
 const gender = Joi.string().min(3).max(15);
 const origin = Joi.string().min(3).max(15);
-const location = Joi.string().min(3).max(15);
+const episodes = Joi.array().items(Joi.string());
 const image = Joi.string().min(3).max(15);
-const episode = Joi.string().min(3).max(15);
+const firstEpisode = Joi.string().min(3).max(15);
 
 
 const createCharacterSchema = Joi.object({
@@ -17,9 +17,9 @@ const createCharacterSchema = Joi.object({
   occupation: occupation.required(),
   gender: gender.required(),
   origin: origin.required(),
-  location: location.required(),
+  episodes: episodes.required(),
   image: image.required(),
-  episode: episode.required()
+  firstEpisode: firstEpisode.required()
 })
 
 const updateCharacterSchema = Joi.object({
@@ -28,9 +28,9 @@ const updateCharacterSchema = Joi.object({
   occupation: occupation,
   gender: gender,
   origin: origin,
-  location: location,
+  episodes: episodes,
   image: image,
-  episode: episode
+  firstEpisode: firstEpisode
 });
 
 const getCharacterSchema = Joi.object({

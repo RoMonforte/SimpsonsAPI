@@ -1,9 +1,9 @@
 const {Model, DataTypes, Sequelize} = require('sequelize');
 
-const CHARACTER_TABLE = 'characters'
-const URL = 'http://localhost:3000/api/v1/characters/'
+const EPISODE_TABLE = 'episodes'
+const URL = 'http://localhost:3000/api/v1/episodes/'
 
-const CharacterSchema = {
+const EpisodeSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -14,32 +14,18 @@ const CharacterSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  status: {
+  airDate: {
+    field: 'air_date',
+    allowNull: false,
+    type: DataTypes.DATE
+  },
+  episode: {
     allowNull: false,
     type: DataTypes.STRING
   },
-  occupation: {
+  characters: {
     allowNull: false,
-    type: DataTypes.STRING
-  },
-  gender: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  origin: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  episodes: {
     type: DataTypes.ARRAY(DataTypes.STRING)
-  },
-  image: {
-    allowNull: false,
-    type: DataTypes.STRING
-  },
-  firstEpisode: {
-    field: 'first_episode',
-    type: DataTypes.STRING
   },
   url: {
     allowNull: false,
@@ -54,18 +40,18 @@ const CharacterSchema = {
   }
 }
 
-class Character extends Model {
+class Episode extends Model {
   static associate() {
       //models
   }
   static config(sequelize) {
     return {
       sequelize,
-      tableName: CHARACTER_TABLE,
-      modelName: 'Character',
+      tableName: EPISODE_TABLE,
+      modelName: 'Episode',
       timestamps: false
     }
   }
 }
 
-module.exports = {CHARACTER_TABLE, CharacterSchema, Character}
+module.exports = {EPISODE_TABLE, EpisodeSchema, Episode}
