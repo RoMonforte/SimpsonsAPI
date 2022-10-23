@@ -1,4 +1,5 @@
 const {Model, DataTypes, Sequelize} = require('sequelize');
+const {EPISODE_TABLE} = require('./episode.model');
 
 const CHARACTER_TABLE = 'characters'
 const URL = 'http://localhost:3000/api/v1/characters/'
@@ -30,19 +31,11 @@ const CharacterSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  episodes: {
-    type: DataTypes.ARRAY(DataTypes.STRING)
-  },
   image: {
     allowNull: false,
     type: DataTypes.STRING
   },
-  firstEpisode: {
-    field: 'first_episode',
-    type: DataTypes.STRING
-  },
   url: {
-    allowNull: false,
     type: DataTypes.STRING,
     defaultValue: `${URL}${this.id}`
   },
@@ -51,12 +44,28 @@ const CharacterSchema = {
     type: DataTypes.DATE,
     field: 'created_at',
     defaultValue: Sequelize.NOW
+  },
+  firstEpisodeId: {
+    field: 'episode_id',
+    type: DataTypes.INTEGER,
+    references: {
+      model: EPISODE_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE' ,
+    onDelete: 'SET NULL'
   }
 }
 
 class Character extends Model {
-  static associate() {
-      //models
+  static associate(models) {
+      this.belongsTo(models.Episode, {as: 'first_episode'});
+      this.belongsToMany(models.Episode, {
+        as: 'episodes',
+        through: models.CharacterEpisode,
+        foreignKey: 'characterId',
+        otherKey: 'episodeId'
+      })
   }
   static config(sequelize) {
     return {

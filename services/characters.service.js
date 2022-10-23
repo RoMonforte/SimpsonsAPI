@@ -11,6 +11,11 @@ class CharactersService {
     return newCharacter;
   }
 
+  async addEpisode(data) {
+    const newEpisode = await models.CharacterEpisode.create(data)
+    return newEpisode;
+  }
+
 
   async find() {
     const rta = await models.Character.findAll();
@@ -20,7 +25,12 @@ class CharactersService {
 
 
   async findOne(id) {
-    const character = await models.Character.findByPk(id);
+    const character = await models.Character.findByPk(id, {
+      include: [
+        'episodes',
+        'first_episode'
+      ]
+    });
     if(!character) {
       throw boom.notFound('Character not found!')
     }

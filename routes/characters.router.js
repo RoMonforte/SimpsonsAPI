@@ -2,7 +2,7 @@ const express = require('express');
 
 const CharactersService = require('../services/characters.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createCharacterSchema, updateCharacterSchema, getCharacterSchema} = require('../schemas/character.schema')
+const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema} = require('../schemas/character.schema')
 
 const router = express.Router();
 const service = new CharactersService();
@@ -11,6 +11,7 @@ router.get('/', async (req,res) => {
   const characters = await service.find();
   res.json(characters);
 });
+
 
 router.get('/:id',
 validatorHandler(getCharacterSchema, 'params'),
@@ -24,6 +25,7 @@ async (req,res, next) => {
   }
 });
 
+
 router.post('/',
 validatorHandler(createCharacterSchema, 'body'),
   async (req,res) => {
@@ -31,6 +33,16 @@ validatorHandler(createCharacterSchema, 'body'),
   const newCharacter = await service.create(body);
   res.status(201).json(newCharacter);
 });
+
+
+router.post('/add-episode',
+validatorHandler(addEpisodeSchema, 'body'),
+  async (req,res) => {
+  const body = req.body;
+  const newEpisode = await service.addEpisode(body);
+  res.status(201).json(newEpisode);
+});
+
 
 router.patch('/:id',
 validatorHandler(getCharacterSchema, 'params'),
@@ -45,6 +57,7 @@ async (req,res, next) => {
     next(err);
   }
 });
+
 
 router.delete('/:id',
 validatorHandler(getCharacterSchema, 'params'),

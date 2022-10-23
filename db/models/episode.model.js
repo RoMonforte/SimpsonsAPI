@@ -41,8 +41,11 @@ const EpisodeSchema = {
 }
 
 class Episode extends Model {
-  static associate() {
-      //models
+  static associate(models) {
+      this.hasMany(models.Character, {
+        as: 'first_episode_characters',
+        foreignKey: 'firstEpisodeId'
+      })
   }
   static config(sequelize) {
     return {

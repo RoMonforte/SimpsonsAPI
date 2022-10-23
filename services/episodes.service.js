@@ -20,7 +20,9 @@ class EpisodesService {
 
 
   async findOne(id) {
-    const episode = await models.Episode.findByPk(id);
+    const episode = await models.Episode.findByPk(id, {
+      include: ['first_episode_characters']
+    });
     if(!episode) {
       throw boom.notFound('Episode not found!')
     }
