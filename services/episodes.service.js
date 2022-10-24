@@ -10,6 +10,18 @@ class EpisodesService {
     const newEpisode = await models.Episode.create(data)
     return newEpisode;
   }
+  async addLocation(data) {
+    const episode = await models.Episode.findByPk(data.episodeId);
+    const location = await models.Location.findByPk(data.locationId);
+    if(!episode) {
+      throw boom.notFound('Episode not found!');
+    } else if (!location){
+      throw boom.notFound('Location not found!')
+    } else {
+      const newLocation = await models.EpisodeLocation.create(data);
+      return newLocation;
+    }
+  }
 
 
   async find() {
@@ -21,7 +33,7 @@ class EpisodesService {
 
   async findOne(id) {
     const episode = await models.Episode.findByPk(id, {
-      include: ['first_episode_characters']
+      include: ['first_episode_characters','locations']
     });
     if(!episode) {
       throw boom.notFound('Episode not found!')

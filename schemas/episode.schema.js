@@ -6,6 +6,8 @@ const airDate = Joi.date();
 const episode = Joi.string().min(3).max(15);
 const characters = Joi.array().items(Joi.string());
 const url = Joi.string().min(3).max(15);
+const episodeId = Joi.number().integer();
+const locationId = Joi.number().integer();
 
 
 const createEpisodeSchema = Joi.object({
@@ -27,5 +29,9 @@ const updateEpisodeSchema = Joi.object({
 const getEpisodeSchema = Joi.object({
   id: id.required(),
 })
+const addLocationSchema = Joi.object({
+  episodeId: episodeId.required(),
+  locationId: locationId.required()
+});
 
-module.exports = {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema};
+module.exports = {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema};

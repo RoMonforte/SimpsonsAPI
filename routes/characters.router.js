@@ -2,14 +2,21 @@ const express = require('express');
 
 const CharactersService = require('../services/characters.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema} = require('../schemas/character.schema')
+const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema, queryCharacterSchema} = require('../schemas/character.schema')
 
 const router = express.Router();
 const service = new CharactersService();
 
-router.get('/', async (req,res) => {
-  const characters = await service.find();
-  res.json(characters);
+router.get('/',
+validatorHandler(queryCharacterSchema, 'query'),
+async (req,res,next) => {
+  try {
+    const characters = await service.find(req.query);
+    res.json(characters);
+  } catch (err) {
+    next(err)
+  }
+
 });
 
 
@@ -37,18 +44,28 @@ validatorHandler(createCharacterSchema, 'body'),
 
 router.post('/add-episode',
 validatorHandler(addEpisodeSchema, 'body'),
-  async (req,res) => {
-  const body = req.body;
-  const newEpisode = await service.addEpisode(body);
-  res.status(201).json(newEpisode);
+  async (req,res,next) => {
+    try {
+      const body = req.body;
+      const newEpisode = await service.addEpisode(body);
+      res.status(201).json(newEpisode);
+    } catch (err) {
+      next(err);
+    }
+
 });
 
 router.post('/add-location',
 validatorHandler(addLocationSchema, 'body'),
-  async (req,res) => {
-  const body = req.body;
-  const newLocation = await service.addLocation(body);
-  res.status(201).json(newLocation);
+  async (req,res,next) => {
+    try{
+      const body = req.body;
+      const newLocation = await service.addLocation(body);
+      res.status(201).json(newLocation);
+    } catch (err) {
+      next(err)
+    }
+
 });
 
 

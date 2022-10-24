@@ -12,21 +12,51 @@ class CharactersService {
   }
 
   async addEpisode(data) {
-    const newEpisode = await models.CharacterEpisode.create(data)
-    return newEpisode;
+    const character = await models.Character.findByPk(data.characterId);
+    const episode = await models.Episode.findByPk(data.locationId);
+    if(!character) {
+      throw boom.notFound('Character not found!');
+    } else if (!episode){
+      throw boom.notFound('Episode not found!')
+    } else {
+      const newEpisode = await models.CharacterEpisode.create(data);
+      return newEpisode;
+    }
   }
+
 
   async addLocation(data) {
-    const newLocation = await models.CharacterLocation.create(data)
-    return newLocation;
+    const character = await models.Character.findByPk(data.characterId);
+    const location = await models.Location.findByPk(data.locationId);
+    if(!character) {
+      throw boom.notFound('Character not found!');
+    } else if (!location){
+      throw boom.notFound('Location not found!')
+    } else {
+      const newLocation = await models.CharacterLocation.create(data);
+      return newLocation;
+    }
   }
 
 
-  async find() {
-    const rta = await models.Character.findAll();
+  async find(query) {
+    const options = {
+      where: {}
+    }
+    const {limit, offset} = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const {firstEpisodeId} = query;
+    if (firstEpisodeId) {
+      options.where.firstEpisodeId = firstEpisodeId;
+    }
+    const rta = await models.Character.findAll(options);
     return rta;
 
   }
+
 
 
   async findOne(id) {

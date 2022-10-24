@@ -2,7 +2,7 @@ const express = require('express');
 
 const EpisodesService = require('../services/episodes.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema} = require('../schemas/episode.schema');
+const {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema} = require('../schemas/episode.schema');
 
 const router = express.Router();
 const service = new EpisodesService();
@@ -30,6 +30,19 @@ validatorHandler(createEpisodeSchema, 'body'),
   const body = req.body;
   const newEpisode = await service.create(body);
   res.status(201).json(newEpisode);
+});
+
+router.post('/add-location',
+validatorHandler(addLocationSchema, 'body'),
+  async (req,res,next) => {
+    try {
+      const body = req.body;
+      const newLocation = await service.addLocation(body);
+      res.status(201).json(newLocation);
+    } catch (err) {
+      next(err);
+    }
+
 });
 
 router.patch('/:id',

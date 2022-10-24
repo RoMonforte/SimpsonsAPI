@@ -36,8 +36,13 @@ const CharacterSchema = {
     type: DataTypes.STRING
   },
   url: {
-    type: DataTypes.STRING,
-    defaultValue: `${URL}${this.id}`
+    type: DataTypes.VIRTUAL,
+    get() {
+      id = this.id;
+      let url = `${URL}${id}`;
+      return url;
+
+    }
   },
   createdAt: {
     allowNull: false,

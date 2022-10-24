@@ -12,6 +12,9 @@ const episodeId = Joi.number().integer();
 const firstEpisodeId = Joi.number().integer();
 const locationId = Joi.number().integer();
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 
 const createCharacterSchema = Joi.object({
   name: name.required(),
@@ -46,6 +49,11 @@ const addLocationSchema = Joi.object({
   locationId: locationId.required()
 });
 
+const queryCharacterSchema = Joi.object({
+  limit,
+  offset,
+  firstEpisodeId,
+});
 
 
-module.exports = {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema};
+module.exports = {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema, queryCharacterSchema};

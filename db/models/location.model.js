@@ -1,7 +1,7 @@
 const {Model, DataTypes, Sequelize} = require('sequelize');
 
 const LOCATION_TABLE = 'locations'
-const URL = 'http://localhost:3000/api/v1/characters/'
+const URL = 'http://localhost:3000/api/v1/locations/'
 
 const LocationSchema = {
   id: {
@@ -19,9 +19,13 @@ const LocationSchema = {
     type: DataTypes.STRING
   },
   url: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    defaultValue: `${URL}${this.id}`
+    type: DataTypes.VIRTUAL,
+    get() {
+      id = this.id;
+      let url = `${URL}${id}`;
+      return url;
+
+    }
   },
   createdAt: {
     allowNull: false,

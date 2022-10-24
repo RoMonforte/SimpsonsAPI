@@ -28,9 +28,13 @@ const EpisodeSchema = {
     type: DataTypes.ARRAY(DataTypes.STRING)
   },
   url: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    defaultValue: `${URL}${this.id}`
+    type: DataTypes.VIRTUAL,
+    get() {
+      id = this.id;
+      let url = `${URL}${id}`;
+      return url;
+
+    }
   },
   createdAt: {
     allowNull: false,
@@ -46,6 +50,12 @@ class Episode extends Model {
         as: 'first_episode_characters',
         foreignKey: 'episode_id'
       });
+      this.belongsToMany(models.Location, {
+        as: 'locations',
+        through: models.EpisodeLocation,
+        foreignKey: 'episodeId',
+        otherKey: 'locationId'
+      })
 
   }
   static config(sequelize) {
