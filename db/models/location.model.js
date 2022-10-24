@@ -18,15 +18,6 @@ const LocationSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  appearedEpisodes: {
-    field: 'appeared_episodes',
-    allowNull: false,
-    type: DataTypes.ARRAY(DataTypes.STRING)
-  },
-  residents: {
-    allowNull: false,
-    type: DataTypes.ARRAY(DataTypes.STRING)
-  },
   url: {
     allowNull: false,
     type: DataTypes.STRING,

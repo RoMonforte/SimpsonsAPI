@@ -65,6 +65,12 @@ class Character extends Model {
         through: models.CharacterEpisode,
         foreignKey: 'characterId',
         otherKey: 'episodeId'
+      });
+      this.belongsToMany(models.Location, {
+        as: 'locations',
+        through: models.CharacterLocation,
+        foreignKey: 'characterId',
+        otherKey: 'locationId'
       })
   }
   static config(sequelize) {

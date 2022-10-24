@@ -44,8 +44,9 @@ class Episode extends Model {
   static associate(models) {
       this.hasMany(models.Character, {
         as: 'first_episode_characters',
-        foreignKey: 'firstEpisodeId'
-      })
+        foreignKey: 'episode_id'
+      });
+
   }
   static config(sequelize) {
     return {

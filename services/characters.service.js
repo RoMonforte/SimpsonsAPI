@@ -16,6 +16,11 @@ class CharactersService {
     return newEpisode;
   }
 
+  async addLocation(data) {
+    const newLocation = await models.CharacterLocation.create(data)
+    return newLocation;
+  }
+
 
   async find() {
     const rta = await models.Character.findAll();
@@ -28,7 +33,8 @@ class CharactersService {
     const character = await models.Character.findByPk(id, {
       include: [
         'episodes',
-        'first_episode'
+        'first_episode',
+        'locations'
       ]
     });
     if(!character) {
