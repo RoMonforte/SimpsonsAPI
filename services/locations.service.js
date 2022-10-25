@@ -1,5 +1,7 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
+const { Episode } = require('../db/models/episode.model');
+const { Character } = require('../db/models/character.model');
 
 class LocationsService {
 
@@ -21,7 +23,31 @@ class LocationsService {
 
   async findOne(id) {
     const location = await models.Location.findByPk(id, {
-      include: ['episodes', 'characters']
+      include: [
+        {
+          model: Episode,
+          required: false,
+          as: 'episodes',
+          attributes: ['name','url'],
+            through: {
+              attributes: []
+            }
+        },         {
+          model: Character,
+          required: false,
+          as: 'characters',
+          attributes: ['name','url'],
+            through: {
+              attributes: []
+            }
+        },
+        {
+        model: Episode,
+        required: false,
+        as: 'first_episode',
+        attributes: ['name','url'],
+        },
+      ]
       });
     if(!location) {
       throw boom.notFound('Location not found!')

@@ -46,6 +46,10 @@ class Episode extends Model {
         as: 'debute_characters',
         foreignKey: 'episode_id'
       });
+      this.hasMany(models.Location, {
+        as: 'debute_locations',
+        foreignKey: 'first_episode_id'
+      });
       this.belongsToMany(models.Location, {
         as: 'locations',
         through: models.EpisodeLocation,
