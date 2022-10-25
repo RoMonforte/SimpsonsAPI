@@ -36,8 +36,19 @@ const LocationSchema = {
 }
 
 class Location extends Model {
-  static associate() {
-      //models
+  static associate(models) {
+    this.belongsToMany(models.Character, {
+      as: 'characters',
+      through: models.CharacterLocation,
+      foreignKey: 'locationId',
+      otherKey: 'characterId'
+    });
+    this.belongsToMany(models.Episode, {
+      as: 'episodes',
+      through: models.EpisodeLocation,
+      foreignKey: 'locationId',
+      otherKey: 'episodeId'
+    });
   }
   static config(sequelize) {
     return {

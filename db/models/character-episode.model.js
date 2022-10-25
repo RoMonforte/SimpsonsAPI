@@ -39,7 +39,7 @@ const CharacterEpisodeSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
 
-  }
+  },
 }
 
 class CharacterEpisode extends Model {

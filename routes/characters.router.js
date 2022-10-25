@@ -36,10 +36,13 @@ async (req,res, next) => {
 router.post('/',
 validatorHandler(createCharacterSchema, 'body'),
   async (req,res) => {
-  const body = req.body;
-  const newCharacter = await service.create(body);
-  res.status(201).json(newCharacter);
-});
+
+      const body = req.body;
+      const newCharacter = await service.create(body);
+      res.status(201).json(newCharacter);
+
+  });
+
 
 
 router.post('/add-episode',

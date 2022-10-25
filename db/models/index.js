@@ -6,6 +6,8 @@ const {CharacterEpisode, CharacterEpisodeSchema} = require('./character-episode.
 const {CharacterLocation, CharacterLocationSchema} = require('./character-location.model');
 const {EpisodeLocation, EpisodeLocationSchema} = require('./episode-location.model');
 
+
+
 function setupModels(sequelize) {
   Character.init(CharacterSchema, Character.config(sequelize));
   Episode.init(EpisodeSchema, Episode.config(sequelize));
@@ -16,6 +18,7 @@ function setupModels(sequelize) {
 
   Episode.associate(sequelize.models);
   Character.associate(sequelize.models);
+  Location.associate(sequelize.models);
 }
 
 module.exports = setupModels;

@@ -1,4 +1,6 @@
 const boom = require('@hapi/boom');
+const { Episode } = require('../db/models/episode.model');
+const { Location } = require('../db/models/location.model');
 const { models } = require('../libs/sequelize');
 
 class CharactersService {
@@ -13,7 +15,7 @@ class CharactersService {
 
   async addEpisode(data) {
     const character = await models.Character.findByPk(data.characterId);
-    const episode = await models.Episode.findByPk(data.locationId);
+    const episode = await models.Episode.findByPk(data.episodeId);
     if(!character) {
       throw boom.notFound('Character not found!');
     } else if (!episode){
@@ -52,6 +54,14 @@ class CharactersService {
     if (firstEpisodeId) {
       options.where.firstEpisodeId = firstEpisodeId;
     }
+    const {name} = query;
+    if (name) {
+      options.where.name = name;
+    }
+    const {episodeName} = query;
+    if (episodeName) {
+      options.where.episodes= name;
+    }
     const rta = await models.Character.findAll(options);
     return rta;
 
@@ -62,9 +72,30 @@ class CharactersService {
   async findOne(id) {
     const character = await models.Character.findByPk(id, {
       include: [
-        'episodes',
-        'first_episode',
-        'locations'
+        {
+          model: Episode,
+          required: false,
+          as: 'episodes',
+          attributes: ['name','url'],
+          through: {
+            attributes: []
+          }
+        },
+        {
+          model: Episode,
+          required: false,
+          as: 'first_episode',
+          attributes: ['name','url'],
+        },
+        {
+          model: Location,
+          required: false,
+          as: 'locations',
+          attributes: ['name','url'],
+          through: {
+            attributes: []
+          }
+        }
       ]
     });
     if(!character) {

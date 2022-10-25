@@ -14,6 +14,7 @@ const locationId = Joi.number().integer();
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
+const episodeName = Joi.string();
 
 
 const createCharacterSchema = Joi.object({
@@ -53,6 +54,8 @@ const queryCharacterSchema = Joi.object({
   limit,
   offset,
   firstEpisodeId,
+  name,
+  episodeName
 });
 
 

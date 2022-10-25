@@ -23,10 +23,6 @@ const EpisodeSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
-  characters: {
-    allowNull: false,
-    type: DataTypes.ARRAY(DataTypes.STRING)
-  },
   url: {
     type: DataTypes.VIRTUAL,
     get() {
@@ -47,7 +43,7 @@ const EpisodeSchema = {
 class Episode extends Model {
   static associate(models) {
       this.hasMany(models.Character, {
-        as: 'first_episode_characters',
+        as: 'debute_characters',
         foreignKey: 'episode_id'
       });
       this.belongsToMany(models.Location, {
@@ -55,7 +51,13 @@ class Episode extends Model {
         through: models.EpisodeLocation,
         foreignKey: 'episodeId',
         otherKey: 'locationId'
-      })
+      });
+      this.belongsToMany(models.Character, {
+        as: 'characters',
+        through: models.CharacterEpisode,
+        foreignKey: 'episodeId',
+        otherKey: 'characterId'
+      });
 
   }
   static config(sequelize) {

@@ -20,7 +20,9 @@ class LocationsService {
 
 
   async findOne(id) {
-    const location = await models.Location.findByPk(id);
+    const location = await models.Location.findByPk(id, {
+      include: ['episodes', 'characters']
+      });
     if(!location) {
       throw boom.notFound('Location not found!')
     }
