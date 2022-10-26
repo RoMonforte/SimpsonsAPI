@@ -19,9 +19,13 @@ const EpisodeSchema = {
     allowNull: false,
     type: DataTypes.DATE
   },
+  season: {
+    allowNull: false,
+    type: DataTypes.INTEGER
+  },
   episode: {
     allowNull: false,
-    type: DataTypes.STRING
+    type: DataTypes.INTEGER
   },
   url: {
     type: DataTypes.VIRTUAL,
@@ -44,7 +48,7 @@ class Episode extends Model {
   static associate(models) {
       this.hasMany(models.Character, {
         as: 'debute_characters',
-        foreignKey: 'episode_id'
+        foreignKey: 'firstEpisodeId'
       });
       this.hasMany(models.Location, {
         as: 'debute_locations',

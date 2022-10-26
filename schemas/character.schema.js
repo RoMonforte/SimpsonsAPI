@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const name = Joi.string().min(3).max(15);
+const name = Joi.string().min(3);
 const status = Joi.string().min(3).max(15);
-const occupation = Joi.string().min(3).max(15);
+const occupation = Joi.string().min(3);
 const gender = Joi.string().min(3).max(15);
 const origin = Joi.string().min(3).max(15);
 const image = Joi.string().min(3).max(15);

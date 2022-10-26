@@ -21,7 +21,7 @@ const LocationSchema = {
     type: DataTypes.STRING
   },
   url: {
-    type: DataTypes.VIRTUAL,
+    type: DataTypes.INTEGER,
     get() {
       id = this.id;
       let url = `${URL}${id}`;

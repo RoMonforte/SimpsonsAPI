@@ -51,7 +51,7 @@ const CharacterSchema = {
     defaultValue: Sequelize.NOW
   },
   firstEpisodeId: {
-    field: 'episode_id',
+    field: 'first_episode_id',
     type: DataTypes.INTEGER,
     references: {
       model: EPISODE_TABLE,
