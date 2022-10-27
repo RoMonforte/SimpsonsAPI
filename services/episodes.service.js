@@ -4,6 +4,8 @@ const { models } = require('../libs/sequelize');
 const { Character } = require('../db/models/character.model');
 const { Location } = require('../db/models/location.model');
 
+const URL = 'http://localhost:3000/api/v1/episodes/'
+
 class EpisodesService {
 
   constructor(){}
@@ -11,7 +13,15 @@ class EpisodesService {
 
   async create(data) {
     const newEpisode = await models.Episode.create(data)
-    return newEpisode;
+    let id =  await newEpisode.id
+    let url = `${URL}${id}`
+    let changes = {
+      ...data,
+      url
+    }
+    const episode = await this.findOne(id);
+    const rta = await episode.update(changes);
+    return rta;
   }
   async addLocation(data) {
     const episode = await models.Episode.findByPk(data.episodeId);

@@ -7,6 +7,7 @@ const episode = Joi.number().integer();
 const season = Joi.number().integer();
 const episodeId = Joi.number().integer();
 const locationId = Joi.number().integer();
+const url = Joi.string().min(3);
 
 
 
@@ -22,6 +23,7 @@ const updateEpisodeSchema = Joi.object({
   airDate: airDate,
   season: season,
   episode: episode,
+  url: url
 });
 
 const getEpisodeSchema = Joi.object({

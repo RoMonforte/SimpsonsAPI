@@ -21,13 +21,7 @@ const LocationSchema = {
     type: DataTypes.STRING
   },
   url: {
-    type: DataTypes.INTEGER,
-    get() {
-      id = this.id;
-      let url = `${URL}${id}`;
-      return url;
-
-    }
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,

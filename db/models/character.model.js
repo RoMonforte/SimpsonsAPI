@@ -2,7 +2,6 @@ const {Model, DataTypes, Sequelize} = require('sequelize');
 const {EPISODE_TABLE} = require('./episode.model');
 
 const CHARACTER_TABLE = 'characters'
-const URL = 'http://localhost:3000/api/v1/characters/'
 
 const CharacterSchema = {
   id: {
@@ -36,13 +35,7 @@ const CharacterSchema = {
     type: DataTypes.STRING
   },
   url: {
-    type: DataTypes.VIRTUAL,
-    get() {
-      id = this.id;
-      let url = `${URL}${id}`;
-      return url;
-
-    }
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,

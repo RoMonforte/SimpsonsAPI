@@ -11,10 +11,10 @@ const characterId = Joi.number().integer();
 const episodeId = Joi.number().integer();
 const firstEpisodeId = Joi.number().integer();
 const locationId = Joi.number().integer();
+const url = Joi.string().min(3);
 
 const limit = Joi.number().integer();
 const offset = Joi.number().integer();
-const episodeName = Joi.string();
 
 
 const createCharacterSchema = Joi.object({
@@ -34,7 +34,8 @@ const updateCharacterSchema = Joi.object({
   gender: gender,
   origin: origin,
   image: image,
-  firstEpisodeId: firstEpisodeId
+  firstEpisodeId: firstEpisodeId,
+  url: url
 });
 
 const getCharacterSchema = Joi.object({
@@ -55,7 +56,10 @@ const queryCharacterSchema = Joi.object({
   offset,
   firstEpisodeId,
   name,
-  episodeName
+  status,
+  gender,
+  occupation,
+  origin
 });
 
 

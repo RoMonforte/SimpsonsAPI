@@ -3,6 +3,8 @@ const { Episode } = require('../db/models/episode.model');
 const { Location } = require('../db/models/location.model');
 const { models } = require('../libs/sequelize');
 
+const URL = 'http://localhost:3000/api/v1/character/'
+
 class CharactersService {
 
   constructor(){}
@@ -10,8 +12,17 @@ class CharactersService {
 
   async create(data) {
     const newCharacter = await models.Character.create(data)
-    return newCharacter;
+    let id =  await newCharacter.id
+    let url = `${URL}${id}`
+    let changes = {
+      ...data,
+      url
+    }
+    const character = await this.findOne(id);
+    const rta = await character.update(changes);
+    return rta;
   }
+
 
   async addEpisode(data) {
     const character = await models.Character.findByPk(data.characterId);
@@ -58,12 +69,27 @@ class CharactersService {
     if (name) {
       options.where.name = name;
     }
-    const {episodeName} = query;
-    if (episodeName) {
-      options.where.episodes= name;
+    const {status} = query;
+    if (status) {
+      options.where.status= status;
     }
+    const {gender} = query;
+    if (gender) {
+      options.where.gender= gender;
+    }
+    const {occupation} = query;
+    if (occupation) {
+      options.where.occupation= occupation;
+    }
+    const {origin} = query;
+    if (origin) {
+      options.where.origin= origin;
+    }
+
     const rta = await models.Character.findAll(options);
     return rta;
+
+
 
   }
 

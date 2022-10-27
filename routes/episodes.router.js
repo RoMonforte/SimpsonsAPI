@@ -1,4 +1,5 @@
 const express = require('express');
+const URL = `http://localhost:3000/api/v1/episodes`;
 
 const EpisodesService = require('../services/episodes.service');
 const validatorHandler = require('../middlewares/validator.handler');
@@ -27,8 +28,9 @@ async (req,res, next) => {
 router.post('/',
 validatorHandler(createEpisodeSchema, 'body'),
   async (req,res) => {
-  const body = req.body;
+  let body = req.body;
   const newEpisode = await service.create(body);
+
   res.status(201).json(newEpisode);
 });
 
