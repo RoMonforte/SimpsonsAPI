@@ -28,9 +28,9 @@ module.exports = {
     await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
     await queryInterface.createTable(EPISODE_LOCATION_TABLE, EpisodeLocationSchema);
 
+    await queryInterface.createTable(CHARACTER_TABLE, CharacterSchema);
     await queryInterface.createTable(LOCATION_TABLE, LocationSchema);
     await queryInterface.createTable(EPISODE_TABLE, EpisodeSchema);
-    await queryInterface.createTable(CHARACTER_TABLE, CharacterSchema);
 
 
   },
