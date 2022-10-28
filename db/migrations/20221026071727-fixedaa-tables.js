@@ -20,10 +20,9 @@ module.exports = {
     await queryInterface.dropTable(CHARACTER_LOCATION_TABLE);
     await queryInterface.dropTable(EPISODE_LOCATION_TABLE);
 
-
+    await queryInterface.dropTable(LOCATION_TABLE);
     await queryInterface.dropTable(CHARACTER_TABLE);
     await queryInterface.dropTable(EPISODE_TABLE);
-    await queryInterface.dropTable(LOCATION_TABLE);
 
     await queryInterface.createTable(CHARACTER_EPISODE_TABLE, CharacterEpisodeSchema);
     await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
