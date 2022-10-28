@@ -16,13 +16,13 @@ const {EpisodeLocationSchema, EPISODE_LOCATION_TABLE} = require('../models/episo
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable(CHARACTER_EPISODE_TABLE, CharacterEpisodeSchema);
-   // await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
-    //await queryInterface.createTable(EPISODE_LOCATION_TABLE, EpisodeLocationSchema);
+   await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
+  await queryInterface.createTable(EPISODE_LOCATION_TABLE, EpisodeLocationSchema);
 
 
-    //await queryInterface.createTable(CHARACTER_TABLE, CharacterSchema);
-    //await queryInterface.createTable(EPISODE_TABLE, EpisodeSchema);
-    //await queryInterface.createTable(LOCATION_TABLE, LocationSchema);
+    await queryInterface.createTable(CHARACTER_TABLE, CharacterSchema);
+    await queryInterface.createTable(EPISODE_TABLE, EpisodeSchema);
+    await queryInterface.createTable(LOCATION_TABLE, LocationSchema);
 
   },
 
