@@ -3,14 +3,21 @@ const URL = `http://localhost:3000/api/v1/episodes`;
 
 const EpisodesService = require('../services/episodes.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema} = require('../schemas/episode.schema');
+const {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema, queryEpisodeSchema} = require('../schemas/episode.schema');
 
 const router = express.Router();
 const service = new EpisodesService();
 
-router.get('/', async (req,res) => {
-  const episodes = await service.find();
-  res.json(episodes);
+router.get('/',
+validatorHandler(queryEpisodeSchema, 'query'),
+async (req,res,next) => {
+  try {
+    const episodes = await service.find(req.query);
+    res.json(episodes);
+  } catch (err) {
+    next(err)
+  }
+
 });
 
 router.get('/:id',

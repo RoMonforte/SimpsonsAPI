@@ -5,6 +5,9 @@ const name = Joi.string().min(3);
 const type = Joi.string().min(3);
 const firstEpisodeId = Joi.number().integer();
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 
 
 const createLocationSchema = Joi.object({
@@ -23,4 +26,12 @@ const getLocationSchema = Joi.object({
   id: id.required(),
 })
 
-module.exports = {createLocationSchema, updateLocationSchema, getLocationSchema};
+const queryLocationSchema = Joi.object({
+  limit,
+  offset,
+  name,
+  type,
+  firstEpisodeId
+});
+
+module.exports = {createLocationSchema, updateLocationSchema, getLocationSchema, queryLocationSchema};

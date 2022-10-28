@@ -9,6 +9,9 @@ const episodeId = Joi.number().integer();
 const locationId = Joi.number().integer();
 const url = Joi.string().min(3);
 
+const limit = Joi.number().integer();
+const offset = Joi.number().integer();
+
 
 
 const createEpisodeSchema = Joi.object({
@@ -34,4 +37,12 @@ const addLocationSchema = Joi.object({
   locationId: locationId.required()
 });
 
-module.exports = {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema};
+const queryEpisodeSchema = Joi.object({
+  limit,
+  offset,
+  season,
+  name,
+  episode,
+});
+
+module.exports = {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema,queryEpisodeSchema};

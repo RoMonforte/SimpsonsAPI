@@ -2,16 +2,22 @@ const express = require('express');
 
 const LocationsService = require('../services/locations.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createLocationSchema, updateLocationSchema, getLocationSchema} = require('../schemas/location.schema')
+const {createLocationSchema, updateLocationSchema, getLocationSchema, queryLocationSchema} = require('../schemas/location.schema')
 
 const router = express.Router();
 const service = new LocationsService();
 
-router.get('/', async (req,res) => {
-  const locations = await service.find();
-  res.json(locations);
-});
+router.get('/',
+validatorHandler(queryLocationSchema, 'query'),
+async (req,res,next) => {
+  try {
+    const locations = await service.find(req.query);
+    res.json(locations);
+  } catch (err) {
+    next(err)
+  }
 
+});
 router.get('/:id',
 validatorHandler(getLocationSchema, 'params'),
 async (req,res, next) => {

@@ -25,8 +25,28 @@ class LocationsService {
   }
 
 
-  async find() {
-    const rta = await models.Location.findAll();
+  async find(query) {
+    const options = {
+      where: {}
+    }
+    const {limit, offset} = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const {name} = query;
+    if (name) {
+      options.where.name = name;
+    }
+    const {type} = query;
+    if (type) {
+      options.where.type = type;
+    }
+    const {firstEpisodeId} = query;
+    if (firstEpisodeId) {
+      options.where.firstEpisodeId= firstEpisodeId;
+    }
+    const rta = await models.Location.findAll(options);
     return rta;
 
   }

@@ -37,8 +37,28 @@ class EpisodesService {
   }
 
 
-  async find() {
-    const rta = await models.Episode.findAll();
+  async find(query) {
+    const options = {
+      where: {}
+    }
+    const {limit, offset} = query;
+    if (limit && offset) {
+      options.limit = limit;
+      options.offset = offset;
+    }
+    const {season} = query;
+    if (season) {
+      options.where.season = season;
+    }
+    const {name} = query;
+    if (name) {
+      options.where.name = name;
+    }
+    const {episode} = query;
+    if (episode) {
+      options.where.episode= episode;
+    }
+    const rta = await models.Episode.findAll(options);
     return rta;
 
   }
