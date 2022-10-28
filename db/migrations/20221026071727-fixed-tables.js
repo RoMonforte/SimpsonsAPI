@@ -15,9 +15,19 @@ const {EpisodeLocationSchema, EPISODE_LOCATION_TABLE} = require('../models/episo
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+
+    await queryInterface.dropTable(CHARACTER_EPISODE_TABLE);
+    await queryInterface.dropTable(CHARACTER_LOCATION_TABLE);
+    await queryInterface.dropTable(EPISODE_LOCATION_TABLE);
+
+
+    await queryInterface.dropTable(CHARACTER_TABLE);
+    await queryInterface.dropTable(EPISODE_TABLE);
+    await queryInterface.dropTable(LOCATION_TABLE);
+
     await queryInterface.createTable(CHARACTER_EPISODE_TABLE, CharacterEpisodeSchema);
-   await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
-  await queryInterface.createTable(EPISODE_LOCATION_TABLE, EpisodeLocationSchema);
+    await queryInterface.createTable(CHARACTER_LOCATION_TABLE, CharacterLocationSchema);
+    await queryInterface.createTable(EPISODE_LOCATION_TABLE, EpisodeLocationSchema);
 
 
     await queryInterface.createTable(CHARACTER_TABLE, CharacterSchema);
