@@ -1,5 +1,6 @@
 <h1 align="center"> Simpsons API </h1>
-![simpsons-wide](https://user-images.githubusercontent.com/80676295/200481237-c23abde5-bd92-4ee8-ae8a-fbf4ceb55534.png)
+
+![APILogo](https://user-images.githubusercontent.com/80676295/200481282-0cb6ec11-3042-43a9-8996-34048b4ca6af.png)
 
 
 
