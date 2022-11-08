@@ -8,4 +8,4 @@
 
 
 
-An API of one of the best shows that currently exists.
+An API Rest from The Simpsons, you can get characters, episodes an locations. Made with NodeJs in framework Express.
