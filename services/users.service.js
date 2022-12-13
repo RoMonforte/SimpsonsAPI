@@ -1,0 +1,52 @@
+const boom = require('@hapi/boom');
+const { models } = require('../libs/sequelize');
+
+const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/users/'
+
+class UsersService {
+
+  constructor(){}
+
+
+  async create(data) {
+    const newUser = await models.User.create(data)
+    let id =  await newUser.id
+
+
+    const user = await this.findOne(id);
+    return user;
+  }
+
+
+  async find() {
+    const rta = await models.User.findAll();
+    return rta;
+
+  }
+
+
+
+  async findOne(id) {
+    const user = await models.User.findByPk(id);
+    if(!user) {
+      throw boom.notFound('User not found!')
+    }
+    return user;
+  }
+
+
+  async update(id, changes) {
+    const user = await this.findOne(id);
+    const rta = await user.update(changes);
+    return rta;
+  }
+
+
+  async delete(id){
+    const user = await this.findOne(id);
+    await user.destroy();
+    return { id };
+  }
+}
+
+module.exports = UsersService;

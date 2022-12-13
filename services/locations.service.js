@@ -4,7 +4,7 @@ const { Episode } = require('../db/models/episode.model');
 const { Character } = require('../db/models/character.model');
 
 
-const URL = 'http://localhost:3000/api/v1/locations/'
+const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/locations/'
 
 class LocationsService {
 

@@ -4,7 +4,7 @@ const { models } = require('../libs/sequelize');
 const { Character } = require('../db/models/character.model');
 const { Location } = require('../db/models/location.model');
 
-const URL = 'http://localhost:3000/api/v1/episodes/'
+const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/episodes/'
 
 class EpisodesService {
 
