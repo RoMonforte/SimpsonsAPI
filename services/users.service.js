@@ -1,5 +1,6 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
+const bcrypt = require('bcrypt');
 
 const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/users/'
 
@@ -9,17 +10,26 @@ class UsersService {
 
 
   async create(data) {
-    const newUser = await models.User.create(data)
-    let id =  await newUser.id
-
-
-    const user = await this.findOne(id);
-    return user;
+    const hash = await bcrypt.hash(data.password, 10)
+    const newUser = await models.User.create({
+      ...data,
+      password: hash
+    })
+    delete newUser.dataValues.password;
+    return newUser;
   }
 
 
   async find() {
     const rta = await models.User.findAll();
+    return rta;
+
+  }
+
+  async findByUsername(username) {
+    const rta = await models.User.findOne( {
+      where: {username}
+    });
     return rta;
 
   }
