@@ -116,4 +116,28 @@ You can access to a single episode where you can see extra info from them.
 | locations | A list ob objects with the names and url to the locations where the episode take place. |
 | debute locations | A list of objects with the names and url to the locations that debuted in this episode. |
 
+## 🏟️🏛️ Locations
+There is a total of x locations sorted by id.
+
+| Key     | Type    | Description |                          
+| :---:   | :---:   | :---:       |
+| id      | Int | The id of the location. |
+| name | string | The name of the location. |
+|type | string | Type of location it is (church,house,mall). |
+|first episode | string | The id of the episode when the location debuted. |
+| url | string | An url pointing to this particular location. |
+| createdAt | Date | Date where the location was added to the database. |
+
+ ## Get all locations
+
+You can access to the list of locations by using the `/locations ` endpoint.
+
+## Get single location 
+You can access to a single location by using their id in the endpoint. `/location/1`
+You can access to a single location where you can see extra info from them.
+| Key | Description |
+| :---:   | :---:   |
+| episodes | An object with the name and url of the episodes where the location appears. |
+| characters  | A list of objects with the names and url of the caracters that appear in this location. |
+| first_episode | A list of objects with the names and url to the first episode the location appears. |
 
