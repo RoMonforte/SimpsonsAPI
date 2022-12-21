@@ -10,7 +10,7 @@ const UserSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  name: {
+  role: {
     allowNull: false,
     type: DataTypes.STRING
   },

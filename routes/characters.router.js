@@ -3,12 +3,15 @@ const express = require('express');
 const CharactersService = require('../services/characters.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema, queryCharacterSchema} = require('../schemas/character.schema');
+const {checkRoles} = require ('../middlewares/auth.handler');
 const passport = require('passport');
+
 
 const router = express.Router();
 const service = new CharactersService();
 
 router.get('/',
+
 validatorHandler(queryCharacterSchema, 'query'),
 async (req,res,next) => {
   try {
@@ -36,6 +39,7 @@ async (req,res, next) => {
 
 router.post('/',
 passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(createCharacterSchema, 'body'),
   async (req,res) => {
 
