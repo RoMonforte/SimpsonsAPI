@@ -3,7 +3,8 @@ const express = require('express');
 const LocationsService = require('../services/locations.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {createLocationSchema, updateLocationSchema, getLocationSchema, queryLocationSchema} = require('../schemas/location.schema')
-
+const {checkRoles} = require ('../middlewares/auth.handler');
+const passport = require('passport');
 const router = express.Router();
 const service = new LocationsService();
 
@@ -31,6 +32,8 @@ async (req,res, next) => {
 });
 
 router.post('/',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(createLocationSchema, 'body'),
   async (req,res) => {
   const body = req.body;
@@ -39,6 +42,8 @@ validatorHandler(createLocationSchema, 'body'),
 });
 
 router.patch('/:id',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getLocationSchema, 'params'),
 validatorHandler(updateLocationSchema, 'body'),
 async (req,res, next) => {
@@ -53,6 +58,8 @@ async (req,res, next) => {
 });
 
 router.delete('/:id',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getLocationSchema, 'params'),
 async (req, res, next) => {
   try {

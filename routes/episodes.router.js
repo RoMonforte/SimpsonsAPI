@@ -4,7 +4,8 @@ const URL = `http://localhost:3000/api/v1/episodes`;
 const EpisodesService = require('../services/episodes.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {createEpisodeSchema, updateEpisodeSchema, getEpisodeSchema, addLocationSchema, queryEpisodeSchema} = require('../schemas/episode.schema');
-
+const {checkRoles} = require ('../middlewares/auth.handler');
+const passport = require('passport');
 const router = express.Router();
 const service = new EpisodesService();
 
@@ -33,6 +34,8 @@ async (req,res, next) => {
 });
 
 router.post('/',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(createEpisodeSchema, 'body'),
   async (req,res) => {
   let body = req.body;
@@ -42,6 +45,8 @@ validatorHandler(createEpisodeSchema, 'body'),
 });
 
 router.post('/add-location',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(addLocationSchema, 'body'),
   async (req,res,next) => {
     try {
@@ -55,6 +60,8 @@ validatorHandler(addLocationSchema, 'body'),
 });
 
 router.patch('/:id',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getEpisodeSchema, 'params'),
 validatorHandler(updateEpisodeSchema, 'body'),
 async (req,res, next) => {
@@ -69,6 +76,8 @@ async (req,res, next) => {
 });
 
 router.delete('/:id',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getEpisodeSchema, 'params'),
 async (req, res, next) => {
   try {

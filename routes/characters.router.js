@@ -11,7 +11,6 @@ const router = express.Router();
 const service = new CharactersService();
 
 router.get('/',
-
 validatorHandler(queryCharacterSchema, 'query'),
 async (req,res,next) => {
   try {
@@ -52,8 +51,9 @@ validatorHandler(createCharacterSchema, 'body'),
 
 
 router.post('/add-episode',
-validatorHandler(addEpisodeSchema, 'body'),
 passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
+validatorHandler(addEpisodeSchema, 'body'),
   async (req,res,next) => {
     try {
       const body = req.body;
@@ -66,6 +66,8 @@ passport.authenticate('jwt', {session: false}),
 });
 
 router.post('/add-location',
+passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(addLocationSchema, 'body'),
 passport.authenticate('jwt', {session: false}),
   async (req,res,next) => {
@@ -82,6 +84,7 @@ passport.authenticate('jwt', {session: false}),
 
 router.patch('/:id',
 passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getCharacterSchema, 'params'),
 validatorHandler(updateCharacterSchema, 'body'),
 async (req,res, next) => {
@@ -98,6 +101,7 @@ async (req,res, next) => {
 
 router.delete('/:id',
 passport.authenticate('jwt', {session: false}),
+checkRoles('superadmin','helper'),
 validatorHandler(getCharacterSchema, 'params'),
 async (req, res, next) => {
   try {
