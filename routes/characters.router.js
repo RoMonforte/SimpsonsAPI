@@ -49,6 +49,7 @@ validatorHandler(createCharacterSchema, 'body'),
 
 router.post('/add-episode',
 validatorHandler(addEpisodeSchema, 'body'),
+passport.authenticate('jwt', {session: false}),
   async (req,res,next) => {
     try {
       const body = req.body;
@@ -62,6 +63,7 @@ validatorHandler(addEpisodeSchema, 'body'),
 
 router.post('/add-location',
 validatorHandler(addLocationSchema, 'body'),
+passport.authenticate('jwt', {session: false}),
   async (req,res,next) => {
     try{
       const body = req.body;
@@ -75,6 +77,7 @@ validatorHandler(addLocationSchema, 'body'),
 
 
 router.patch('/:id',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(getCharacterSchema, 'params'),
 validatorHandler(updateCharacterSchema, 'body'),
 async (req,res, next) => {
@@ -90,6 +93,7 @@ async (req,res, next) => {
 
 
 router.delete('/:id',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(getCharacterSchema, 'params'),
 async (req, res, next) => {
   try {
