@@ -10,9 +10,6 @@
 
 An API Rest from The Simpsons, you can get characters, episodes an locations. Made with NodeJs in framework Express.
 
-Currently you can interact with the API in the current link:
-
-<https://afternoon-tor-34419.herokuapp.com/api/v1/characters>
 
 
 ## :hammer: Project functionalities
