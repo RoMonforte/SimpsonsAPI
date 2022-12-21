@@ -2,7 +2,8 @@ const express = require('express');
 
 const CharactersService = require('../services/characters.service');
 const validatorHandler = require('../middlewares/validator.handler');
-const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema, queryCharacterSchema} = require('../schemas/character.schema')
+const {createCharacterSchema, updateCharacterSchema, getCharacterSchema, addEpisodeSchema, addLocationSchema, queryCharacterSchema} = require('../schemas/character.schema');
+const passport = require('passport');
 
 const router = express.Router();
 const service = new CharactersService();
@@ -34,6 +35,7 @@ async (req,res, next) => {
 
 
 router.post('/',
+passport.authenticate('jwt', {session: false}),
 validatorHandler(createCharacterSchema, 'body'),
   async (req,res) => {
 
