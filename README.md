@@ -18,7 +18,7 @@ An API Rest from The Simpsons, you can get characters, episodes an locations. Ma
 - `Funcionality 2`: Create characters,episodes and locations(protected with jwt). 
 - `Funcionality 3`: Delete characters, episodes and locations(protected with jwt).
 - `Funcionality 3`: Modify characters, episodes and locations(protected with jwt).
-- `Funcionality 4`: Create, modify and login with users.
+- `Funcionality 4`: Create, modify and login with users(protected with jwt).
 
 ## ℹ️📄 Info and Pagination
   The API will send all data unless you send mediaquerys.
@@ -89,7 +89,7 @@ You can access to a single character where you can see extra info from them.
 | locations | A list ob objects with the names and url to the locations where the character has been. |
 
 
-## 🟢🟢 Episodes
+## 🟢🌀 Episodes
 There is a total of x episodes sorted by id.
 
 | Key     | Type    | Description |                          
@@ -141,3 +141,15 @@ You can access to a single location where you can see extra info from them.
 | characters  | A list of objects with the names and url of the caracters that appear in this location. |
 | first_episode | A list of objects with the names and url to the first episode the location appears. |
 
+
+
+## ⚠️✅ Login
+
+You can access in the `/login` endpoint with an username and password. In this access you can obtain a JWT to send petitions to the create, delete, patch and post endpoint of characters, episodes and locations.
+
+There is two types of 'users' 
+
+| User | Description |
+| :---:   | :---:   |
+| admin | Permission to anything. |
+| helper  | Permission to create and edit characters, episodes and locations. |
