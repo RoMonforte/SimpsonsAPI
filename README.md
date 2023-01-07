@@ -162,3 +162,4 @@ There is two types of 'users'
    * If you create a character with a first eppisode id that doesn't exist the app crash! 🔴
    * Frontend page for login! 🔴
    * Add more characters, episodes and locations! 🔴 (Feel free to ask for a helper user to enrich the db).
+   * Wagger library for documentation. 🔴
