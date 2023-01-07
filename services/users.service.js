@@ -21,7 +21,6 @@ class UsersService {
 
   async find() {
     const rta = await models.User.findAll();
-    delete rta.dataValues.password;
     return rta;
 
   }
