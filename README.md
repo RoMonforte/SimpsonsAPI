@@ -10,6 +10,9 @@
 
 An API Rest from The Simpsons, you can get characters, episodes an locations. Made with NodeJs in framework Express.
 
+You can interact with the API REST in the next link:
+https://simpsonsapi.up.railway.app/
+
 
 
 ## :hammer: Project functionalities
@@ -61,7 +64,7 @@ Episodes
 
 
 ## 🧔🙍 Characters
-There is a total of x characters sorted by id.
+There is a total of 6 characters sorted by id.
 
 | Key     | Type    | Description |                          
 | :---:   | :---:   | :---:       |
@@ -77,7 +80,7 @@ There is a total of x characters sorted by id.
 
  ## Get all characters
 
-You can access to the list of characters by using the `/characters ` endpoint.
+You can access to the list of characters by using: https://simpsonsapi.up.railway.app/api/v1/characters endpoint.
 
 ## Get single character 
 You can access to a single character by using their id in the endpoint. `/characters/1`
@@ -90,7 +93,7 @@ You can access to a single character where you can see extra info from them.
 
 
 ## 🟢🌀 Episodes
-There is a total of x episodes sorted by id.
+There is a total of 9 episodes sorted by id.
 
 | Key     | Type    | Description |                          
 | :---:   | :---:   | :---:       |
@@ -104,7 +107,7 @@ There is a total of x episodes sorted by id.
 
  ## Get all episodes
 
-You can access to the list of episodes by using the `/episodes ` endpoint.
+You can access to the list of episodes by using: https://simpsonsapi.up.railway.app/api/v1/episodes endpoint.
 
 ## Get single episode 
 You can access to a single episode by using their id in the endpoint. `/episodes/1`
@@ -117,7 +120,7 @@ You can access to a single episode where you can see extra info from them.
 | debute locations | A list of objects with the names and url to the locations that debuted in this episode. |
 
 ## 🏟️🏛️ Locations
-There is a total of x locations sorted by id.
+There is a total of 3 locations sorted by id.
 
 | Key     | Type    | Description |                          
 | :---:   | :---:   | :---:       |
@@ -130,7 +133,7 @@ There is a total of x locations sorted by id.
 
  ## Get all locations
 
-You can access to the list of locations by using the `/locations ` endpoint.
+You can access to the list of locations by using: https://simpsonsapi.up.railway.app/api/v1/locations endpoint.
 
 ## Get single location 
 You can access to a single location by using their id in the endpoint. `/location/1`
@@ -145,7 +148,7 @@ You can access to a single location where you can see extra info from them.
 
 ## ⚠️✅ Login
 
-You can access in the `/login` endpoint with an username and password. In this access you can obtain a JWT to send petitions to the create, delete, patch and post endpoint of characters, episodes and locations.
+You can access with a POST in: https://simpsonsapi.up.railway.app/api/v1/auth/login endpoint with an username and password. In this access you can obtain a JWT to send petitions to the create, delete, patch and post endpoint of characters, episodes and locations.
 
 There is two types of 'users' 
 
@@ -153,3 +156,9 @@ There is two types of 'users'
 | :---:   | :---:   |
 | admin | Permission to anything. |
 | helper  | Permission to create and edit characters, episodes and locations. |
+
+## 🔨🔧 CURRENTLY WORKING ON: 
+
+   * If you create a character with a first eppisode id that doesn't exist the app crash! 🔴
+   * Frontend page for login! 🔴
+   * Add more characters, episodes and locations! 🔴 (Feel free to ask for a helper user to enrich the db).
