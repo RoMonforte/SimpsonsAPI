@@ -1,10 +1,11 @@
 const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
+const { config } = require('../config/config');
 const { Episode } = require('../db/models/episode.model');
 const { Character } = require('../db/models/character.model');
 
 
-const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/locations/'
+
 
 class LocationsService {
 
@@ -14,7 +15,7 @@ class LocationsService {
   async create(data) {
     const newLocation = await models.Location.create(data)
     let id =  await newLocation.id
-    let url = `${URL}${id}`
+    let url = `${config.urlRail}locations/${id}`
     let changes = {
       ...data,
       url

@@ -2,7 +2,6 @@ const boom = require('@hapi/boom');
 const { models } = require('../libs/sequelize');
 const bcrypt = require('bcrypt');
 
-const URL = 'https://afternoon-tor-34419.herokuapp.com//api/v1/users/'
 
 class UsersService {
 
