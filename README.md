@@ -92,12 +92,20 @@ You can access to a single character where you can see extra info from them.
 | locations | A list ob objects with the names and url to the locations where the character has been. |
 
  ## Add episodes to all characters
- You can add appeared episodes and locations to a character by sending a POST to: https://simpsonsapi.up.railway.app/api/v1/characters/add-episode endpoint.
+ You can add appeared episodes to a character by sending a POST to: https://simpsonsapi.up.railway.app/api/v1/characters/add-episode endpoint.
  You need to send the following information:
  | Key | Description |
  | :---:   | :---:   |
- | CharacterId | The id of the character you want to add episode to.  |
+ | characterId | The id of the character you want to add episode to.  |
   | episodeId | The id of the episode you want to add to a character. |
+  
+ ## Add locations to all characters
+ You can add appeared locations to a character by sending a POST to: https://simpsonsapi.up.railway.app/api/v1/characters/add-episode endpoint.
+ You need to send the following information:
+ | Key | Description |
+ | :---:   | :---:   |
+ | characterId | The id of the character you want to add location to.  |
+ | locationId | The id of the location you want to add to a character. |
 
 ## 🟢🌀 Episodes
 There is a total of 9 episodes sorted by id.
