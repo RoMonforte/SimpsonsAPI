@@ -15,7 +15,7 @@ https://simpsonsapi.up.railway.app/
 
 
 
-## :hammer: Project functionalities
+# :hammer: Project functionalities
 
 - `Funcionality 1`: Get single/all characters, episodes and locations.
 - `Funcionality 2`: Create characters,episodes and locations(protected with jwt). 
@@ -23,7 +23,7 @@ https://simpsonsapi.up.railway.app/
 - `Funcionality 3`: Modify characters, episodes and locations(protected with jwt).
 - `Funcionality 4`: Create, modify and login with users(protected with jwt).
 
-## ℹ️📄 Info and Pagination
+# ℹ️📄 Info and Pagination
   The API will send all data unless you send mediaquerys.
   You can chain several queries in the same call.
   There is several mediaquerys working such as:
@@ -63,7 +63,7 @@ Episodes
 | episode | int | Number of the episode |
 
 
-## 🧔🙍 Characters
+# 🧔🙍 Characters
 There is a total of 6 characters sorted by id.
 
 | Key     | Type    | Description |                          
@@ -78,7 +78,7 @@ There is a total of 6 characters sorted by id.
 | firstEpisodeId | int | The number of episode where the character first appeared. |
 | createdAt | Date | Date where the character was added to the database. |
 
- ## Get all characters
+## Get all characters
 
 You can access to the list of characters by using: https://simpsonsapi.up.railway.app/api/v1/characters endpoint.
 
@@ -99,7 +99,7 @@ You can access to a single character where you can see extra info from them.
  | characterId | The id of the character you want to add episode to.  |
   | episodeId | The id of the episode you want to add to a character. |
   
- ## Add locations to all characters
+## Add locations to all characters
  You can add appeared locations to a character by sending a POST to: https://simpsonsapi.up.railway.app/api/v1/characters/add-episode endpoint.
  You need to send the following information:
  | Key | Description |
@@ -107,7 +107,31 @@ You can access to a single character where you can see extra info from them.
  | characterId | The id of the character you want to add location to.  |
  | locationId | The id of the location you want to add to a character. |
 
-## 🟢🌀 Episodes
+## Create character
+You can create a character sending a POST using the `/characters` endpoint.
+This is an schema of what you need to send in the petition.
+
+| Key     | Type    | Description |                          
+| :---:   | :---:   | :---:       |
+| name | string | The name of the character. |
+|status | string | The status of the character (Alive, Dead, Unknown). |
+|occupation | string | The occupation of the character. |
+| gender | string | The gender of the character. |
+| origin | string | The country of origin of the character. |
+| image | URL | An URL to an image of the character. |
+| firstEpisodeId | int | The number of episode where the character first appeared. |
+
+This is protected with a JWT, so you need to send a bearer token.
+## Edit characters
+ You can edit an existing character sendig a PATCH using their id in the  `/characters/id` endpoint.
+ This is protected with a JWT, so you need to send a bearer token.
+ 
+## Delete character
+You can delete a character by sending a DELETE using their id in the  `/characters/id` endpoint.
+ This is protected with a JWT, so you need to send a bearer token.
+ 
+ 
+# 🟢🌀 Episodes
 There is a total of 9 episodes sorted by id.
 
 | Key     | Type    | Description |                          
@@ -134,7 +158,18 @@ You can access to a single episode where you can see extra info from them.
 | locations | A list ob objects with the names and url to the locations where the episode take place. |
 | debute locations | A list of objects with the names and url to the locations that debuted in this episode. |
 
-## 🏟️🏛️ Locations
+## Add location to all episodes
+
+ You can add appeared locations to an episode by sending a POST to: https://simpsonsapi.up.railway.app/api/v1/episodes/add-location
+ You need to send the following information:
+ 
+ | Key | Description |
+ | :---:   | :---:   |
+ | locationId | The id of the location you want to add to an episode.  |
+ | episodeId | The id of the episode you want to add a location. |
+
+
+# 🏟️🏛️ Locations
 There is a total of 3 locations sorted by id.
 
 | Key     | Type    | Description |                          
@@ -161,7 +196,7 @@ You can access to a single location where you can see extra info from them.
 
 
 
-## ⚠️✅ Login
+# ⚠️✅ Login
 
 You can access with a POST in: https://simpsonsapi.up.railway.app/api/v1/auth/login endpoint with an username and password. In this access you can obtain a JWT to send petitions to the create, delete, patch and post endpoint of characters, episodes and locations.
 
@@ -172,7 +207,7 @@ There is two types of 'users'
 | admin | Permission to anything. |
 | helper  | Permission to create and edit characters, episodes and locations. |
 
-## 🔨🔧 CURRENTLY WORKING ON: 
+# 🔨🔧 CURRENTLY WORKING ON: 
 
    * If you create a character with a first eppisode id that doesn't exist the app crash! 🔴
    * Frontend page for login! 🔴
