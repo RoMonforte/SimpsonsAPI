@@ -21,7 +21,7 @@ https://simpsonsapi.up.railway.app/
 - `Funcionality 2`: Create characters,episodes and locations(protected with jwt). 
 - `Funcionality 3`: Delete characters, episodes and locations(protected with jwt).
 - `Funcionality 3`: Modify characters, episodes and locations(protected with jwt).
-- `Funcionality 4`: Create, modify and login with users(protected with jwt).
+- `Funcionality 4`: Create, modify and login with users(protected with jwt)..
 
 # ℹ️📄 Info and Pagination
   The API will send all data unless you send mediaquerys.
